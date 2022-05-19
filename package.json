@@ -103,6 +103,7 @@
     "@testing-library/dom": "^8.13.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
+    "@tsconfig/next": "^1.0.2",
     "alex": "^10.0.0",
     "autoprefixer": "^10.4.5",
     "babel-jest": "^28.0.3",
@@ -158,6 +159,8 @@
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^25.0.0",
     "stylelint-prettier": "^2.0.0",
+    "ts-migrate": "^0.1.28",
+    "typescript": "^4.6.4",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^4.9.0"
