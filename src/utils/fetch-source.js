@@ -115,7 +115,7 @@ export async function fetchSource(
   // Try to obtain the source from the web.
 
   const parsedName = parseFileNameFromSymbolication(file);
-  const downloadRecipe = getDownloadRecipeForSourceFile(parsedName);
+  const downloadRecipe = await getDownloadRecipeForSourceFile(parsedName);
 
   switch (downloadRecipe.type) {
     case 'CORS_ENABLED_SINGLE_FILE': {

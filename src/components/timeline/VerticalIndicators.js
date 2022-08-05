@@ -71,7 +71,7 @@ export class VerticalIndicators extends React.PureComponent<Props> {
           color = 'var(--blue-50)';
           break;
         default:
-          if (marker.name.startsWith('Contentful paint ')) {
+          if (marker.data.name.startsWith('performance.vitals.')) {
             color = 'var(--green-60)';
           }
       }

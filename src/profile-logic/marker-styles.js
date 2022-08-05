@@ -209,6 +209,32 @@ const markerStyles: { +[styleName: string]: MarkerStyle } = {
     background: colors.PURPLE_70,
     top: 17,
   },
+
+  // Palette specific markers...
+  MainThreadLongTask: {
+    ...defaultStyle,
+    background: 'hsl(347, 100%, 60%)',
+    borderLeft: colors.RED_50,
+    borderRight: colors.RED_50,
+    squareCorners: true,
+    top: 6,
+  },
+  DOMEvent: {
+    ...defaultStyle,
+    background: colors.BLUE_50,
+    borderLeft: colors.BLUE_50,
+    borderRight: colors.BLUE_50,
+    squareCorners: true,
+    top: 6,
+  },
+  Electron: {
+    ...defaultStyle,
+    background: colors.PURPLE_70,
+    borderLeft: colors.PURPLE_70,
+    borderRight: colors.PURPLE_70,
+    squareCorners: true,
+    top: 6,
+  },
 };
 
 export const overlayFills = {

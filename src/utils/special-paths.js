@@ -145,7 +145,7 @@ export function parseFileNameFromSymbolication(
 // to send permissive CORS headers.
 // Some files cannot be obtained from the internet at all. Others can only be
 // obtained as part of an archive.
-export function getDownloadRecipeForSourceFile(
+export async function getDownloadRecipeForSourceFile(
   parsedFile: ParsedFileNameFromSymbolication
 ): SourceFileDownloadRecipe {
   switch (parsedFile.type) {
@@ -210,7 +210,31 @@ export function getDownloadRecipeForSourceFile(
       };
     }
     case 'normal': {
-      return { type: 'NO_KNOWN_CORS_URL' };
+      const { path } = parsedFile;
+
+      // Construct the url to the asset endpoint
+      const IS_PROD = false;
+      const endpoint = new URL(
+        'api/v1/asset',
+        IS_PROD ? 'https://palette.dev' : 'http://localhost:3000'
+      );
+      endpoint.searchParams.set('key', 'k-123');
+      endpoint.searchParams.set('filename', path);
+      endpoint.searchParams.set('version', 'h-123');
+
+      let url: string;
+      if (path.includes('webpack')) {
+        endpoint.searchParams.set('source', true);
+        url = endpoint.toString();
+      } else {
+        const res = await fetch(endpoint);
+        url = await res.text();
+      }
+
+      return {
+        type: 'CORS_ENABLED_SINGLE_FILE',
+        url,
+      };
     }
     default:
       throw assertExhaustiveCheck(parsedFile.type, 'unhandled ParsedFile type');
