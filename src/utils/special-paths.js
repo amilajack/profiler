@@ -213,10 +213,11 @@ export async function getDownloadRecipeForSourceFile(
       const { path } = parsedFile;
 
       // Construct the url to the asset endpoint
-      const IS_PROD = false;
       const endpoint = new URL(
         'api/v1/asset',
-        IS_PROD ? 'https://palette.dev' : 'http://localhost:3000'
+        process.env.NODE_ENV === 'production'
+          ? 'https://palette.dev'
+          : 'http://localhost:3000'
       );
       endpoint.searchParams.set('key', 'k-123');
       endpoint.searchParams.set('filename', path);
