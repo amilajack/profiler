@@ -3,7 +3,7 @@ yarn-error.log
 node_modules/
 .DS_Store
 dist/
-public_html/
+public/
 flow-coverage
 coverage
 .eslintcache

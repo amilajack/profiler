@@ -11,6 +11,7 @@ esproposal.optional_chaining=enable
 <PROJECT_ROOT>/node_modules/.*
 <PROJECT_ROOT>/res/before-load\.js
 <PROJECT_ROOT>/dist/.*
+<PROJECT_ROOT>/public/.*
 
 [libs]
 src/types/libdef
