@@ -15,7 +15,7 @@
 ## The following feature names must be treated as a brand. They cannot be translated.
 
 -firefox-brand-name = Firefox
--profiler-brand-name = Firefox Profiler
+-profiler-brand-name = Profiler
 -profiler-brand-short-name = Profiler
 -firefox-nightly-brand-name = Firefox Nightly
 
@@ -238,7 +238,7 @@ Home--menu-button-instructions =
     profile in { -firefox-brand-name }, then analyse it and share it with profiler.firefox.com.
 # The word WebChannel should not be translated.
 # This message can be seen on https://main--perf-html.netlify.app/ in the tooltip
-# of the "Enable Firefox Profiler menu button" button.
+# of the "Enable Profiler menu button" button.
 Home--enable-button-unavailable =
     .title = This profiler instance was unable to connect to the WebChannel, so it cannot enable the profiler menu button.
 # The word WebChannel, the pref name, and the string "about:config" should not be translated.

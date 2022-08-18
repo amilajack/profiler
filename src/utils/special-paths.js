@@ -215,9 +215,9 @@ export async function getDownloadRecipeForSourceFile(
       // Construct the url to the asset endpoint
       const endpoint = new URL(
         'api/v1/asset',
-        process.env.NODE_ENV === 'production'
-          ? 'https://palette.dev'
-          : 'http://localhost:3000'
+        process.env.NODE_ENV === 'development'
+          ? 'http://localhost:3000'
+          : 'https://palette.dev'
       );
       endpoint.searchParams.set('key', 'k-123');
       endpoint.searchParams.set('filename', path);

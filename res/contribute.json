@@ -1,5 +1,5 @@
 {
-    "name": "Firefox profiler",
+    "name": "profiler",
       "description": "Web app for Firefox performance analysis",
       "repository": {
         "url": "https://github.com/firefox-devtools/profiler",

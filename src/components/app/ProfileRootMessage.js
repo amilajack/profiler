@@ -25,7 +25,7 @@ export class ProfileRootMessage extends React.PureComponent<Props> {
       <div className="rootMessageContainer">
         <div className="rootMessage">
           <Localized id="ProfileRootMessage--title">
-            <h1 className="rootMessageTitle">Firefox Profiler</h1>
+            <h1 className="rootMessageTitle">Profiler</h1>
           </Localized>
           {title ? <h2>{title}</h2> : null}
           <div className="rootMessageText">

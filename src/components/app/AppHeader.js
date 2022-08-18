@@ -35,7 +35,7 @@ export class AppHeader extends React.PureComponent<{||}> {
           >
             <span className="appHeaderSlogan">
               <InnerNavigationLink dataSource="none" className="appHeaderLink">
-                Firefox Profiler
+                Profiler
               </InnerNavigationLink>{' '}
               –{' '}
               <span className="appHeaderSubtext">
