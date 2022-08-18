@@ -467,7 +467,14 @@ class HomeImpl extends React.PureComponent<HomeProps, HomeState> {
     this.props.triggerLoadingFromUrl(url);
   };
 
+  componentDidMount() {
+    if (process.env.NODE_ENV === 'production')
+      location.replace('https://palette.dev/');
+  }
+
   render() {
+    if (process.env.NODE_ENV === 'production') return null;
+
     const { specialMessage } = this.props;
 
     return (
