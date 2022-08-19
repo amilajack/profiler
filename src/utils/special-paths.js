@@ -212,11 +212,18 @@ export async function getDownloadRecipeForSourceFile(
     case 'normal': {
       const { path } = parsedFile;
 
+      const paletteUrl = decodeURIComponent(
+        new URL(location).pathname.split('/')[2]
+      );
+      const paletteUrlObj = new URL(paletteUrl);
+      const key = paletteUrlObj.searchParams.get('key');
+      const version = paletteUrlObj.searchParams.get('version');
+
       // Construct the url to the asset endpoint
       const endpoint = new URL('api/v1/asset', 'https://palette.dev');
-      endpoint.searchParams.set('key', 'a-123');
+      endpoint.searchParams.set('key', key);
       endpoint.searchParams.set('filename', path);
-      endpoint.searchParams.set('version', 'h-123');
+      endpoint.searchParams.set('version', version);
 
       let url: string;
       if (path.includes('webpack')) {
