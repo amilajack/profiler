@@ -21,6 +21,7 @@ export class FooterLinks extends PureComponent<{||}, State> {
   };
 
   render() {
+    return null;
     if (this.state.hide) {
       return null;
     }
