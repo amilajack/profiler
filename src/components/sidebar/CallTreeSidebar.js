@@ -453,23 +453,7 @@ class CallTreeSidebarImpl extends React.PureComponent<Props> {
               />
             </>
           ) : null}
-          {selfTimeBreakdownByCategory ? (
-            <>
-              <h4 className="sidebar-title3 sidebar-title-label">
-                <div className="sidebar-title-label-left">Categories</div>
-                <div className="sidebar-title-label-right">
-                  Self {getWeightTypeLabel(weightType)}
-                </div>
-              </h4>
-              <CategoryBreakdown
-                kind="self"
-                breakdown={selfTimeBreakdownByCategory}
-                categoryList={categoryList}
-                number={number}
-              />
-            </>
-          ) : null}
-          {totalTimeBreakdownByImplementation && totalTime.value ? (
+          {/* {totalTimeBreakdownByImplementation && totalTime.value ? (
             <React.Fragment>
               <h4 className="sidebar-title3 sidebar-title-label">
                 <div>Implementation</div>
@@ -492,7 +476,7 @@ class CallTreeSidebarImpl extends React.PureComponent<Props> {
                 number={number}
               />
             </React.Fragment>
-          ) : null}
+          ) : null} */}
         </div>
       </aside>
     );

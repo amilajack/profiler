@@ -361,6 +361,7 @@ class MenuButtonsImpl extends React.PureComponent<Props, State> {
   }
 
   render() {
+    return null;
     return (
       <>
         {this._renderFullViewButtonForActiveTab()}
