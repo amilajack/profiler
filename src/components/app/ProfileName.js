@@ -141,10 +141,8 @@ class ProfileNameImpl extends React.PureComponent<Props, State> {
           defaultValue={profileNameWithDefault}
           aria-label="Profile name"
           title={title}
-          onBlur={this.changeProfileNameIfChanged}
           ref={this.inputRef}
-          // Keypress won't
-          onKeyDown={this.blurOnEscapeOrEnter}
+          readOnly // Don't allow the user to edit the profile name.
         />
       </>
     );
