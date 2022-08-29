@@ -135,34 +135,31 @@ class StackSettingsImpl extends PureComponent<Props> {
       showUserTimings,
       hideInvertCallstack,
       currentSearchString,
-      hasJsAllocations,
-      hasNativeAllocations,
-      canShowRetainedMemory,
-      callTreeSummaryStrategy,
-      allowSwitchingStackType,
+      // hasJsAllocations,
+      // hasNativeAllocations,
+      // canShowRetainedMemory,
+      // callTreeSummaryStrategy,
     } = this.props;
 
-    const hasAllocations = hasJsAllocations || hasNativeAllocations;
+    // const hasAllocations = hasJsAllocations || hasNativeAllocations;
 
     return (
       <div className="stackSettings">
         <ul className="stackSettingsList">
-          {allowSwitchingStackType ? (
-            <li className="stackSettingsListItem stackSettingsFilter">
-              {this._renderImplementationRadioButton(
-                'StackSettings--implementation-all-stacks',
-                'combined'
-              )}
-              {this._renderImplementationRadioButton(
-                'StackSettings--implementation-javascript',
-                'js'
-              )}
-              {this._renderImplementationRadioButton(
-                'StackSettings--implementation-native',
-                'cpp'
-              )}
-            </li>
-          ) : null}
+          {/* <li className="stackSettingsListItem stackSettingsFilter">
+            {this._renderImplementationRadioButton(
+              'StackSettings--implementation-all-stacks',
+              'combined'
+            )}
+            {this._renderImplementationRadioButton(
+              'StackSettings--implementation-javascript',
+              'js'
+            )}
+            {this._renderImplementationRadioButton(
+              'StackSettings--implementation-native',
+              'cpp'
+            )}
+          </li>
           {hasAllocations ? (
             <li className="stackSettingsListItem stackSettingsFilter">
               <label>
@@ -209,7 +206,7 @@ class StackSettingsImpl extends PureComponent<Props> {
                 </select>
               </label>
             </li>
-          ) : null}
+          ) : null} */}
           {hideInvertCallstack ? null : (
             <li className="stackSettingsListItem">
               <label className="photon-label photon-label-micro stackSettingsLabel">
