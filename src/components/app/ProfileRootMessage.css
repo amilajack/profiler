@@ -19,10 +19,8 @@
   max-width: 600px;
   box-sizing: border-box;
   padding: 3em;
-  border: 1px solid #ccc;
   background-color: #fff;
   border-radius: 3px;
-  box-shadow: 0 5px 25px #0b1f50;
   font-size: 130%;
 }
 
