@@ -225,8 +225,20 @@ export async function getDownloadRecipeForSourceFile(
       endpoint.searchParams.set('filename', path);
       endpoint.searchParams.set('version', version);
 
+      const isSource = (filename) => {
+        if (filename.startsWith('webpack://')) {
+          return true;
+        }
+        try {
+          new URL(filename);
+          return false;
+        } catch {
+          return true;
+        }
+      };
+
       let url: string;
-      if (path.includes('webpack')) {
+      if (isSource(path)) {
         endpoint.searchParams.set('source', true);
         url = endpoint.toString();
       } else {
