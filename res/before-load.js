@@ -1,6 +1,7 @@
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+/* prettier-ignore */
 {
   if (window.location.host === 'perf-html.io') {
     // Unregister service workers, and redirect. This can't be done with a 301 redirect
@@ -34,6 +35,6 @@
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
     // If changing this tracker ID, update it in the end user docs as well.
-    ga('create', 'UA-35433268-81', 'auto');
+    ga('create', 'G-NPFRF2LT9W', 'auto');
   }
 }

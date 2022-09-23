@@ -6,7 +6,7 @@ window.$docsify = {
   loadNavbar: true,
   subMaxLevel: 2,
   // If changing the Google Analytics ID, change it in res/before-load.js as well.
-  ga: 'UA-35433268-81',
+  ga: 'G-NPFRF2LT9W',
   // Photon blue-50
   themeColor: '#0a84ff',
   noCompileLinks: ['.*\\.svg']

@@ -92,7 +92,7 @@ export function getComposedSelectorsPerThread(
       }
       let hasSamples = samples.length > 0 && stackTable.length > 0;
       if (hasSamples) {
-        const stackIndex = ensureExists(samples.stack[0]);
+        const stackIndex = samples.stack[0];
         if (stackTable.prefix[stackIndex] === null) {
           // There's only a single stack frame, check if it's '(root)'.
           const frameIndex = stackTable.frame[stackIndex];
