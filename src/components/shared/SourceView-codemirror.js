@@ -60,6 +60,7 @@ function _languageExtForPath(
     return rust();
   }
   if (
+    path.endsWith('.mjs') ||
     path.endsWith('.js') ||
     path.endsWith('.jsm') ||
     path.endsWith('.jsx') ||
