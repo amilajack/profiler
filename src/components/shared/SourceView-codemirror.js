@@ -40,6 +40,7 @@ import { classHighlighter } from '@lezer/highlight';
 import { cpp } from '@codemirror/lang-cpp';
 import { rust } from '@codemirror/lang-rust';
 import { javascript } from '@codemirror/lang-javascript';
+import { html } from '@codemirror/lang-html';
 import clamp from 'clamp';
 
 import type { LineTimings } from 'firefox-profiler/types';
@@ -68,6 +69,9 @@ function _languageExtForPath(
     path.endsWith('.tsx')
   ) {
     return javascript();
+  }
+  if (path.endsWith('.vue')) {
+    return html();
   }
   if (
     path.endsWith('.c') ||
