@@ -3,7 +3,7 @@
   "scripts": {
     "build:clean": "rimraf dist && mkdirp dist",
     "build:quiet": "yarn build:clean && cross-env NODE_ENV=development webpack",
-    "build": "yarn build:quiet --progress && yarn run publish",
+    "build": "yarn build-prod --progress && yarn run publish",
     "build-prod:quiet": "yarn build:clean && yarn build-photon && cross-env NODE_ENV=production webpack",
     "build-prod": "yarn build-prod:quiet --progress",
     "build-l10n": "yarn build:clean && cross-env NODE_ENV=development L10N=1 webpack --progress",
