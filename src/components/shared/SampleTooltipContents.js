@@ -131,7 +131,8 @@ export class SampleTooltipContents extends React.PureComponent<Props> {
         convertStackToCallNodeAndCategoryPath(rangeFilteredThread, stackIndex),
         rangeFilteredThread
       );
-      hasStack = stack.length > 1 || stack[0].funcName !== '(root)';
+      console.log(stack);
+      hasStack = stack.length > 1 || stack?.[0]?.funcName !== '(root)';
     }
 
     return (
