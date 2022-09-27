@@ -89,7 +89,7 @@ function SourceStatusOverlay({ status }: SourceStatusOverlayProps) {
             <Localized id="SourceView--source-not-available-title">
               <h3>Source not available</h3>
             </Localized>
-            <Localized
+            {/* <Localized
               id="SourceView--source-not-available-text"
               elems={{
                 a: (
@@ -112,9 +112,9 @@ function SourceStatusOverlay({ status }: SourceStatusOverlayProps) {
                 </a>
                 for supported scenarios and planned improvements.
               </p>
-            </Localized>
+            </Localized> */}
             <ul>
-              {status.errors.map((error, key) => {
+              {/* {status.errors.map((error, key) => {
                 switch (error.type) {
                   case 'NO_KNOWN_CORS_URL': {
                     return (
@@ -194,7 +194,7 @@ function SourceStatusOverlay({ status }: SourceStatusOverlayProps) {
                   default:
                     throw assertExhaustiveCheck(error.type);
                 }
-              })}
+              })} */}
             </ul>
           </div>
         </div>
