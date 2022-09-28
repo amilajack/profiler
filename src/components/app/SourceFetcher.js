@@ -85,15 +85,16 @@ class SourceFetcherImpl extends React.PureComponent<Props> {
         fetchUrlResponse: async (url: string, postData?: MixedObject) => {
           beginLoadingSourceFromUrl(file, url);
 
+          const credentials = url.includes('palette.dev') ? 'include' : 'omit';
           const requestInit =
             postData !== undefined
               ? {
                   body: postData,
                   method: 'POST',
                   mode: 'cors',
-                  credentials: 'omit',
+                  credentials,
                 }
-              : { credentials: 'omit' };
+              : { credentials };
           const response = await fetch(url, requestInit);
           if (response.status !== 200) {
             throw new Error(

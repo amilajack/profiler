@@ -1114,7 +1114,9 @@ export async function _fetchProfile(
   while (true) {
     let response;
     try {
-      response = await fetch(url);
+      response = await fetch(url, {
+        credentials: 'include',
+      });
     } catch (e) {
       // Case 1: Exception.
       if (_loadProbablyFailedDueToSafariLocalhostHTTPRestriction(url, e)) {

@@ -216,12 +216,12 @@ export async function getDownloadRecipeForSourceFile(
         new URL(location).pathname.split('/')[2]
       );
       const paletteUrlObj = new URL(paletteUrl);
-      const key = paletteUrlObj.searchParams.get('key');
+      const id = paletteUrlObj.searchParams.get('id');
       const version = paletteUrlObj.searchParams.get('version');
 
       // Construct the url to the asset endpoint
       const endpoint = new URL('api/v1/asset', 'https://palette.dev');
-      endpoint.searchParams.set('key', key);
+      endpoint.searchParams.set('id', id);
       endpoint.searchParams.set('filename', path);
       endpoint.searchParams.set('version', version);
 
@@ -242,7 +242,9 @@ export async function getDownloadRecipeForSourceFile(
         endpoint.searchParams.set('source', true);
         url = endpoint.toString();
       } else {
-        const res = await fetch(endpoint);
+        const res = await fetch(endpoint, {
+          credentials: 'include',
+        });
         url = await res.text();
       }
 
