@@ -219,6 +219,10 @@ export async function getDownloadRecipeForSourceFile(
       const id = paletteUrlObj.searchParams.get('projectId');
       const version = paletteUrlObj.searchParams.get('version');
 
+      if (!id || !version) {
+        throw new Error('id and version must be passed to url');
+      }
+
       // Construct the url to the asset endpoint
       const endpoint = new URL('api/v1/asset', 'https://palette.dev');
       endpoint.searchParams.set('projectId', id);
