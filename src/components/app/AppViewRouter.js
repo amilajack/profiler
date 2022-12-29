@@ -96,8 +96,6 @@ class AppViewRouterImpl extends PureComponent<AppViewRouterProps> {
           }
         }
 
-        console.log({ view });
-
         return (
           <Localized
             attrs={{ title: true }}
