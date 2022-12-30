@@ -89,18 +89,15 @@ class AppViewRouterImpl extends PureComponent<AppViewRouterProps> {
             message = 'AppViewRouter--error-from-localhost-url-safari';
           } else {
             console.error(view.error);
+            message = view.error.message;
             additionalMessage = (
-              <>
-                <p>{view.error.toString()}</p>
-                <p>The full stack has been written to the Web Console.</p>
-              </>
+              <p>The full stack has been written to the Web Console.</p>
             );
           }
         }
 
         return (
           <Localized
-            id={message}
             attrs={{ title: true }}
             elems={{
               // WebKit bug link, only used for AppViewRouter--message-from-localhost-url-safari
@@ -117,7 +114,9 @@ class AppViewRouterImpl extends PureComponent<AppViewRouterProps> {
               additionalMessage={additionalMessage}
               showLoader={false}
               showBackHomeLink={true}
-            >{`missing translation for ${message}`}</ProfileRootMessage>
+            >
+              {message}
+            </ProfileRootMessage>
           </Localized>
         );
       }

@@ -1132,10 +1132,15 @@ export async function _fetchProfile(
 
     // case 3: unrecoverable error.
     if (response.status !== 403) {
-      throw new Error(oneLine`
-          Could not fetch the profile on remote server.
-          Response was: ${response.status} ${response.statusText}.
-        `);
+      const data = await response.json();
+      const error = new Error(
+        data.message ??
+          oneLine`
+      Could not fetch the profile on remote server.
+      Response was: ${response.status} ${response.statusText}.
+    `
+      );
+      throw error;
     }
 
     // case 4: 403 errors can be transient while a profile is uploaded.
