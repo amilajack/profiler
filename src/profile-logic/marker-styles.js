@@ -219,6 +219,14 @@ const markerStyles: { +[styleName: string]: MarkerStyle } = {
     squareCorners: true,
     top: 6,
   },
+  MainThreadLongPaint: {
+    ...defaultStyle,
+    background: 'hsl(347, 100%, 60%)',
+    borderLeft: colors.RED_50,
+    borderRight: colors.RED_50,
+    squareCorners: true,
+    top: 6,
+  },
   DOMEvent: {
     ...defaultStyle,
     background: colors.BLUE_50,
