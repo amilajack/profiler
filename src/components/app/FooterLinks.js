@@ -21,7 +21,6 @@ export class FooterLinks extends PureComponent<{||}, State> {
   };
 
   render() {
-    return null;
     if (this.state.hide) {
       return null;
     }
@@ -39,30 +38,30 @@ export class FooterLinks extends PureComponent<{||}, State> {
             ✕
           </button>
         </Localized>
-        <a
+        {/* <a
           className="appFooterLinksLink"
           href="https://www.mozilla.org/about/legal/terms/mozilla"
           target="_blank"
           rel="noopener noreferrer"
         >
           <Localized id="FooterLinks--legal">Legal</Localized>
-        </a>
-        <a
+        </a> */}
+        {/* <a
           className="appFooterLinksLink"
           href="https://www.mozilla.org/privacy/websites"
           target="_blank"
           rel="noopener noreferrer"
         >
           <Localized id="FooterLinks--Privacy">Privacy</Localized>
-        </a>
-        <a
+        </a> */}
+        {/* <a
           className="appFooterLinksLink"
           href="https://www.mozilla.org/privacy/websites/#cookies"
           target="_blank"
           rel="noopener noreferrer"
         >
           <Localized id="FooterLinks--Cookies">Cookies</Localized>
-        </a>
+        </a> */}
         <LanguageSwitcher />
       </div>
     );
