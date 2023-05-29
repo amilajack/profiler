@@ -19,7 +19,10 @@ import {
   failLoadingSource,
 } from 'firefox-profiler/actions/sources';
 import { fetchSource } from 'firefox-profiler/utils/fetch-source';
-import { findAddressProofForFile } from 'firefox-profiler/profile-logic/profile-data';
+import {
+  findAddressProofForFile,
+  findResourceIdProofForFile,
+} from 'firefox-profiler/profile-logic/profile-data';
 import type { BrowserConnection } from 'firefox-profiler/app-logic/browser-connection';
 import { assertExhaustiveCheck } from 'firefox-profiler/utils/flow';
 import explicitConnect from 'firefox-profiler/utils/connect';
@@ -75,6 +78,7 @@ class SourceFetcherImpl extends React.PureComponent<Props> {
 
     const addressProof =
       profile !== null ? findAddressProofForFile(profile, file) : null;
+    const resourceName = findResourceIdProofForFile(profile, file);
 
     const fetchSourceResult = await fetchSource(
       file,
@@ -83,6 +87,8 @@ class SourceFetcherImpl extends React.PureComponent<Props> {
       this._archiveCache,
       {
         fetchUrlResponse: async (url: string, postData?: MixedObject) => {
+          url += '&resource=' + encodeURIComponent(resourceName);
+
           beginLoadingSourceFromUrl(file, url);
 
           const credentials = url.includes('palette.dev') ? 'include' : 'omit';

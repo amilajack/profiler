@@ -3444,6 +3444,27 @@ export function findAddressProofForFile(
 }
 
 /**
+ * Find the address and library (debugName, breakpadId) for any frame which
+ * was symbolicated to the given filename.
+ */
+export function findResourceIdProofForFile(
+  profile: Profile,
+  file: string
+): AddressProof | null {
+  for (const thread of profile.threads) {
+    const { funcTable, resourceTable, stringTable } = thread;
+    const fileStringIndex = stringTable.indexForString(file);
+    const func = funcTable.fileName.indexOf(fileStringIndex);
+    console.log(file, func);
+    const resource = funcTable.resource[func];
+    if (resourceTable.name[resource] !== -1) {
+      return stringTable.getString(resourceTable.name[resource]);
+    }
+  }
+  return null;
+}
+
+/**
  * Determines the timeline type by looking at the profile data.
  *
  * There are three options:
