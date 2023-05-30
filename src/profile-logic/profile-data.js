@@ -3455,8 +3455,7 @@ export function findResourceIdProofForFile(
     const { funcTable, resourceTable, stringTable } = thread;
     const fileStringIndex = stringTable.indexForString(file);
     const func = funcTable.fileName.indexOf(fileStringIndex);
-    console.log(file, func);
-    const resource = funcTable.resource[func];
+    const resource = funcTable._resource[func];
     if (resourceTable.name[resource] !== -1) {
       return stringTable.getString(resourceTable.name[resource]);
     }
