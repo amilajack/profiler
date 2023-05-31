@@ -32,7 +32,7 @@ export const markerSchemaFrontEndOnly: MarkerSchema[] = [
   {
     name: 'Jank',
     display: ['marker-table', 'marker-chart'],
-    tooltipLabel: 'Jank – event processing delay',
+    tooltipLabel: 'Long Task – event processing delay',
     tableLabel: 'Event processing delay',
     data: [
       {
