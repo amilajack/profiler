@@ -109,7 +109,7 @@ const PROPERTIES_HUMAN_LABELS = {
   connectEnd: 'Waiting for HTTP request',
   requestStart: 'HTTP request and waiting for response',
   responseStart: 'HTTP response',
-  responseEnd: 'Waiting to transmit the response',
+  responseEnd: 'Waiting to receive the response',
   endTime: 'End',
 };
 
@@ -200,7 +200,7 @@ export class TooltipNetworkMarkerPhases extends React.PureComponent<Props> {
       // that.
       const startValue = +payload[previousProperty];
       const endValue = +payload[thisProperty];
-      const phaseDuration = endValue - startValue;
+      const phaseDuration = Math.max(0, endValue - startValue);
       const startPosition = startValue - startTime;
 
       phases.push(

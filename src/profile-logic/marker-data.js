@@ -1128,9 +1128,9 @@ export function isNavigationMarker({ name, data }: Marker) {
   }
   if (data.category === 'Navigation') {
     // Filter by payloads.
-    if (name === 'Load' || name === 'DOMContentLoaded') {
-      return true;
-    }
+    // if (name === 'Load' || name === 'DOMContentLoaded') {
+    return true;
+    // }
   }
   return false;
 }
