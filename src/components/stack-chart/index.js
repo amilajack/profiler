@@ -34,6 +34,7 @@ import {
   changeSelectedCallNode,
   changeRightClickedCallNode,
   handleCallNodeTransformShortcut,
+  openSourceView,
 } from '../../actions/profile-view';
 
 import { getCallNodePathFromIndex } from '../../profile-logic/profile-data';
@@ -59,12 +60,15 @@ import type {
 
 import type { ConnectedProps } from '../../utils/connect';
 
+import type { CallTree } from 'firefox-profiler/profile-logic/call-tree';
+
 import './index.css';
 
 const STACK_FRAME_HEIGHT = 16;
 
 type StateProps = {|
   +thread: Thread,
+  +callTree: CallTree,
   +weightType: WeightType,
   +innerWindowIDToPageMap: Map<InnerWindowID, Page> | null,
   +maxStackDepth: number,
@@ -89,6 +93,7 @@ type DispatchProps = {|
   +changeRightClickedCallNode: typeof changeRightClickedCallNode,
   +updatePreviewSelection: typeof updatePreviewSelection,
   +handleCallNodeTransformShortcut: typeof handleCallNodeTransformShortcut,
+  +openSourceView: typeof openSourceView,
 |};
 
 type Props = ConnectedProps<{||}, StateProps, DispatchProps>;
@@ -126,6 +131,19 @@ class StackChartImpl extends React.PureComponent<Props> {
       threadsKey,
       getCallNodePathFromIndex(callNodeIndex, callNodeInfo.callNodeTable)
     );
+  };
+
+  _onDoubleClick = (callNodeIndex: IndexIntoCallNodeTable | null) => {
+    const { callTree, openSourceView } = this.props;
+
+    if (callNodeIndex === null) {
+      return;
+    }
+    const file = callTree.getRawFileNameForCallNode(callNodeIndex);
+    if (file === null) {
+      return;
+    }
+    openSourceView(file, 'stack-chart');
   };
 
   _shouldDisplayTooltips = () => this.props.rightClickedCallNodeIndex === null;
@@ -237,6 +255,7 @@ class StackChartImpl extends React.PureComponent<Props> {
                   // TODO: support right clicking user timing markers #2354.
                   onRightClick: this._onRightClickedCallNodeChange,
                   shouldDisplayTooltips: this._shouldDisplayTooltips,
+                  onDoubleClick: this._onDoubleClick,
                   scrollToSelectionGeneration,
                   marginLeft: timelineMarginLeft,
                   displayStackType: displayStackType,
@@ -259,6 +278,7 @@ export const StackChart = explicitConnect<{||}, StateProps, DispatchProps>({
 
     return {
       thread: selectedThreadSelectors.getFilteredThread(state),
+      callTree: selectedThreadSelectors.getCallTree(state),
       // Use the raw WeightType here, as the stack chart does not use the call tree
       weightType: selectedThreadSelectors.getSamplesWeightType(state),
       maxStackDepth: selectedThreadSelectors.getFilteredCallNodeMaxDepth(state),
@@ -286,6 +306,7 @@ export const StackChart = explicitConnect<{||}, StateProps, DispatchProps>({
     changeRightClickedCallNode,
     updatePreviewSelection,
     handleCallNodeTransformShortcut,
+    openSourceView,
   },
   component: StackChartImpl,
 });

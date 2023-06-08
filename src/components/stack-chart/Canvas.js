@@ -64,6 +64,7 @@ type OwnProps = {|
   +callNodeInfo: CallNodeInfo,
   +selectedCallNodeIndex: IndexIntoCallNodeTable | null,
   +onSelectionChange: (IndexIntoCallNodeTable | null) => void,
+  +onDoubleClick: (IndexIntoCallNodeTable | null) => void,
   +onRightClick: (IndexIntoCallNodeTable | null) => void,
   +shouldDisplayTooltips: () => boolean,
   +scrollToSelectionGeneration: number,
@@ -465,17 +466,29 @@ class StackChartCanvasImpl extends React.PureComponent<Props> {
   };
 
   _onDoubleClickStack = (hoveredItem: HoveredStackTiming | null) => {
-    if (hoveredItem === null) {
-      return;
+    const result =
+      this._getCallNodeIndexOrMarkerIndexFromHoveredItem(hoveredItem);
+
+    if (!result) {
+      this.props.onDoubleClick(null);
     }
-    const { depth, stackTimingIndex } = hoveredItem;
-    const { combinedTimingRows, updatePreviewSelection } = this.props;
-    updatePreviewSelection({
-      hasSelection: true,
-      isModifying: false,
-      selectionStart: combinedTimingRows[depth].start[stackTimingIndex],
-      selectionEnd: combinedTimingRows[depth].end[stackTimingIndex],
-    });
+
+    // TODO implement selecting user timing markers #2355
+    if (result && result.type === 'call-node') {
+      this.props.onDoubleClick(result.index);
+    }
+
+    // if (hoveredItem === null) {
+    //   return;
+    // }
+    // const { depth, stackTimingIndex } = hoveredItem;
+    // const { combinedTimingRows, updatePreviewSelection } = this.props;
+    // updatePreviewSelection({
+    //   hasSelection: true,
+    //   isModifying: false,
+    //   selectionStart: combinedTimingRows[depth].start[stackTimingIndex],
+    //   selectionEnd: combinedTimingRows[depth].end[stackTimingIndex],
+    // });
   };
 
   _getCallNodeIndexOrMarkerIndexFromHoveredItem(
