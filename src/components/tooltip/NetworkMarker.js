@@ -376,10 +376,14 @@ export function getNetworkMarkerDetails(
     );
   }
 
+  // palette can't determine cache status
+  // details.push(
+  //   <TooltipDetail label="Cache" key="Network-Cache">
+  //     {payload.cache}
+  //   </TooltipDetail>
+  // );
+
   details.push(
-    <TooltipDetail label="Cache" key="Network-Cache">
-      {payload.cache}
-    </TooltipDetail>,
     <TooltipDetail label="URL" key="Network-URL">
       <span className="tooltipDetailsUrl">{payload.URI}</span>
     </TooltipDetail>
@@ -393,11 +397,12 @@ export function getNetworkMarkerDetails(
     );
   }
 
-  details.push(
-    <TooltipDetail label="Priority" key="Network-Priority">
-      {_getHumanReadablePriority(payload.pri)}
-    </TooltipDetail>
-  );
+  // palette can't determine priority
+  // details.push(
+  //   <TooltipDetail label="Priority" key="Network-Priority">
+  //     {_getHumanReadablePriority(payload.pri)}
+  //   </TooltipDetail>
+  // );
 
   if (mimeType) {
     details.push(
