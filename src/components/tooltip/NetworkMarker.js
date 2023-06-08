@@ -393,11 +393,12 @@ export function getNetworkMarkerDetails(
     );
   }
 
-  details.push(
-    <TooltipDetail label="Priority" key="Network-Priority">
-      {_getHumanReadablePriority(payload.pri)}
-    </TooltipDetail>
-  );
+  // palette can't determine priority
+  // details.push(
+  //   <TooltipDetail label="Priority" key="Network-Priority">
+  //     {_getHumanReadablePriority(payload.pri)}
+  //   </TooltipDetail>
+  // );
 
   if (mimeType) {
     details.push(
