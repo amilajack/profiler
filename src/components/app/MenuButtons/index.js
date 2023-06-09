@@ -176,21 +176,18 @@ class MenuButtonsImpl extends React.PureComponent<Props, State> {
 
   _renderMetaInfoPanel() {
     const { currentProfileUploadedInformation } = this.props;
-    const { metaInfoPanelState } = this.state;
+    // const { metaInfoPanelState } = this.state;
+    const metaInfoPanelState = 'initial';
+
     switch (metaInfoPanelState) {
       case 'initial': {
         return (
           <>
-            <h2 className="metaInfoSubTitle">
-              <Localized id="MenuButtons--index--metaInfo-subtitle">
-                Profile Information
-              </Localized>
-            </h2>
-            {currentProfileUploadedInformation
+            {/* {currentProfileUploadedInformation
               ? this._renderUploadedProfileActions(
                   currentProfileUploadedInformation
                 )
-              : null}
+              : null} */}
             <MetaInfoPanel />
           </>
         );
@@ -361,17 +358,17 @@ class MenuButtonsImpl extends React.PureComponent<Props, State> {
   }
 
   render() {
-    return null;
     return (
       <>
-        {this._renderFullViewButtonForActiveTab()}
-        {this._renderRevertProfile()}
+        {/* {this._renderFullViewButtonForActiveTab()} */}
+        {/* {this._renderRevertProfile()} */}
         {this._renderMetaInfoButton()}
-        {this._renderPublishPanel()}
-        {this._renderPermalink()}
+        {/* {this._renderPublishPanel()}
+        {this._renderPermalink()}*/}
         <a
-          href="/docs/"
+          href="https://palette.dev/docs"
           target="_blank"
+          rel="noreferrer"
           className="menuButtonsButton menuButtonsButton-hasLeftBorder"
           title="Open the documentation in a new window"
         >

@@ -22,7 +22,10 @@ import {
   formatPlatform,
 } from 'firefox-profiler/profile-logic/profile-metainfo';
 
-import { assertExhaustiveCheck } from 'firefox-profiler/utils/flow';
+import {
+  assertExhaustiveCheck,
+  objectEntries,
+} from 'firefox-profiler/utils/flow';
 import explicitConnect from 'firefox-profiler/utils/connect';
 
 import type { Profile, SymbolicationStatus } from 'firefox-profiler/types';
@@ -125,6 +128,7 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
     const { configuration } = meta;
 
     const platformInformation = formatPlatform(meta);
+    const tags = meta.tags ? objectEntries(meta.tags) : [];
 
     let cpuCount = null;
     if (meta.physicalCPUs && meta.logicalCPUs) {
@@ -155,6 +159,11 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
 
     return (
       <>
+        {/* <h2 className="metaInfoSubTitle">
+          <Localized id="MenuButtons--index--metaInfo-subtitle">
+            Profile Information
+          </Localized>
+        </h2>
         <div className="metaInfoSection">
           {meta.startTime ? (
             <div className="metaInfoRow">
@@ -195,7 +204,7 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
                   </Localized>
                 </span>
                 {
-                  /* The capacity is expressed in "entries", where 1 entry == 8 bytes. */
+                  // The capacity is expressed in "entries", where 1 entry == 8 bytes.
                   formatBytes(configuration.capacity * 8, 0)
                 }
               </div>
@@ -231,14 +240,14 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
             </>
           ) : null}
           {this.renderSymbolication()}
-        </div>
+        </div> */}
         <h2 className="metaInfoSubTitle">
           <Localized id="MenuButtons--metaInfo--application">
             Application
           </Localized>
         </h2>
         <div className="metaInfoSection">
-          {meta.product ? (
+          {/* {meta.product ? (
             <div className="metaInfoRow">
               <span className="metaInfoLabel">
                 <Localized id="MenuButtons--metaInfo--name-and-version">
@@ -247,8 +256,20 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
               </span>
               {formatProductAndVersion(meta)}
             </div>
+          ) : null} */}
+          {meta.appVersion ? (
+            <div className="metaInfoRow">
+              <span className="metaInfoLabel">Version</span>
+              <span className="metaInfoValue">{meta.appVersion}</span>
+            </div>
           ) : null}
-          {meta.updateChannel ? (
+          {meta.appUrl ? (
+            <div className="metaInfoRow">
+              <span className="metaInfoLabel">Path</span>
+              <span className="metaInfoValue">{meta.appUrl}</span>
+            </div>
+          ) : null}
+          {/* {meta.updateChannel ? (
             <div className="metaInfoRow">
               <span className="metaInfoLabel">
                 <Localized id="MenuButtons--metaInfo--update-channel">
@@ -310,13 +331,13 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
               </span>
               <div className="metaInfoLargeContent">{meta.arguments}</div>
             </div>
-          ) : null}
+          ) : null} */}
         </div>
         <h2 className="metaInfoSubTitle">
           <Localized id="MenuButtons--metaInfo--platform">Platform</Localized>
         </h2>
         <div className="metaInfoSection">
-          {meta.device ? (
+          {/* {meta.device ? (
             <div className="metaInfoRow">
               <span className="metaInfoLabel">
                 <Localized id="MenuButtons--metaInfo--device">
@@ -325,32 +346,46 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
               </span>
               {meta.device}
             </div>
+          ) : null} */}
+          {meta.browser ? (
+            <div className="metaInfoRow">
+              <span className="metaInfoLabel">Browser</span>
+              <span className="metaInfoValue">{meta.browser}</span>
+            </div>
           ) : null}
           {platformInformation ? (
             <div className="metaInfoRow">
-              <span className="metaInfoLabel">
-                <Localized id="MenuButtons--metaInfo--os">OS:</Localized>
-              </span>
-              {platformInformation}
+              <span className="metaInfoLabel">OS</span>
+              <span className="metaInfoValue">{platformInformation}</span>
             </div>
           ) : null}
-          {meta.abi ? (
+          {/* {meta.abi ? (
             <div className="metaInfoRow">
               <span className="metaInfoLabel">
                 <Localized id="MenuButtons--metaInfo--abi">ABI:</Localized>
               </span>
               {meta.abi}
             </div>
-          ) : null}
-          {cpuCount ? (
+          ) : null} */}
+          {meta.cpu ? (
             <div className="metaInfoRow">
-              <span className="metaInfoLabel">
-                <Localized id="MenuButtons--metaInfo--cpu">CPU:</Localized>
-              </span>
-              {cpuCount}
+              <span className="metaInfoLabel">CPU</span>
+              <span className="metaInfoValue">{meta.cpu}</span>
             </div>
           ) : null}
-          {meta.mainMemory ? (
+          {meta.memory ? (
+            <div className="metaInfoRow">
+              <span className="metaInfoLabel">RAM</span>
+              <span className="metaInfoValue">{meta.memory}</span>
+            </div>
+          ) : null}
+          {meta.gpu ? (
+            <div className="metaInfoRow">
+              <span className="metaInfoLabel">GPU</span>
+              <span className="metaInfoValue">{meta.gpu}</span>
+            </div>
+          ) : null}
+          {/* {meta.mainMemory ? (
             <div className="metaInfoRow">
               <span className="metaInfoLabel">
                 <Localized id="MenuButtons--metaInfo--main-memory">
@@ -359,9 +394,22 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
               </span>
               {formatBytes(meta.mainMemory)}
             </div>
-          ) : null}
+          ) : null} */}
         </div>
-        {meta.visualMetrics ? (
+        {tags.length !== 0 ? (
+          <>
+            <h2 className="metaInfoSubTitle">Tags</h2>
+            <div className="metaInfoSection">
+              {tags.map(([label, value], index) => (
+                <div className="metaInfoRow" key={index}>
+                  <span className="metaInfoLabel">{label}</span>
+                  <span className="metaInfoValue">{value}</span>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : null}
+        {/* {meta.visualMetrics ? (
           <>
             <h2 className="metaInfoSubTitle">
               <Localized id="MenuButtons--metaInfo--visual-metrics">
@@ -395,14 +443,14 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
               </div>
             </div>
           </>
-        ) : null}
+        ) : null} */}
         {/*
               Older profiles(before FF 70) don't have any overhead info.
               Don't show anything if that's the case.
             */}
-        {profilerOverhead ? (
+        {/* {profilerOverhead ? (
           <MetaOverheadStatistics profilerOverhead={profilerOverhead} />
-        ) : null}
+        ) : null} */}
       </>
     );
   }

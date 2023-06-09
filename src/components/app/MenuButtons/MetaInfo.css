@@ -21,8 +21,20 @@
 .metaInfoLabel,
 .metaInfoWideLabel {
   display: inline-block;
-  width: 120px;
+  /* width: 120px; */
+  padding-right: 8px;
   color: var(--grey-50);
+}
+
+.metaInfoRow {
+  display: flex;
+  justify-content: space-between;
+}
+
+.metaInfoValue {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .metaInfoLargeContent {

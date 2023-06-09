@@ -89,7 +89,8 @@ export function formatPlatform(meta: {
         ? meta.oscpu.slice(0, meta.oscpu.indexOf(' '))
         : 'Linux';
     default:
-      return meta.oscpu || '';
+      return meta.platform || '';
+    // return meta.oscpu || '';
   }
 }
 
