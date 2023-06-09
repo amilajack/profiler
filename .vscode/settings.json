@@ -1,0 +1,4 @@
+{
+  // Disable any JS validation to not interfer with Flow
+  "javascript.validate.enable": false,
+}
