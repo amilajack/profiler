@@ -65,10 +65,20 @@ export class VerticalIndicators extends React.PureComponent<Props> {
           color = 'var(--grey-40)';
           break;
         case 'Load':
+        case 'navigation.load':
           color = 'var(--red-60)';
           break;
         case 'DOMContentLoaded':
+        case 'navigation.domInteractive':
+        case 'navigation.domContentLoaded':
+        case 'navigation.domComplete':
           color = 'var(--blue-50)';
+          break;
+        case 'performance.vitals.fcp':
+          color = 'var(--green-70)';
+          break;
+        case 'performance.vitals.lcp':
+          color = 'var(--green-80)';
           break;
         default:
           if (marker.name.startsWith('performance.')) {
