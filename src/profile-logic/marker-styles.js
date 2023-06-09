@@ -36,15 +36,43 @@ const ccStyle = {
   background: '#ffc600',
 };
 
+// Thresholds for Palette specific markers.
+const THRESHOLDS: { +[styleName: string]: [number, number] } = {
+  MainThreadLongTask: [100, 500],
+};
+
 /**
  * Get the marker style. Start off by looking at the marker name, then fallback to
  * the marker type.
  */
 export function getMarkerStyle(marker: Marker): MarkerStyle {
-  const { data, name } = marker;
+  const { data, name, start, end } = marker;
+  const dur = end === null ? 0 : end - start;
   if (name in markerStyles) {
     return markerStyles[name];
   }
+
+  if (data && data.type in markerStyles && data.type in THRESHOLDS) {
+    const [, max] = THRESHOLDS[data.type];
+    if (dur >= max) {
+      return {
+        ...markerStyles[data.type],
+        background: colors.RED_50,
+        borderLeft: colors.RED_50,
+        borderRight: colors.RED_50,
+      };
+    }
+    // Color both `Good` and `Decent` thresholds as orange.
+    // If we use yellow for `Good` it can be confused with JS stacks,
+    // and using green would send the wrong signal.
+    return {
+      ...markerStyles[data.type],
+      background: colors.ORANGE_50,
+      borderLeft: colors.ORANGE_50,
+      borderRight: colors.ORANGE_50,
+    };
+  }
+
   if (data && data.type in markerStyles) {
     return markerStyles[data.type];
   }
@@ -213,7 +241,7 @@ const markerStyles: { +[styleName: string]: MarkerStyle } = {
   // Palette specific markers...
   MainThreadLongTask: {
     ...defaultStyle,
-    background: 'hsl(347, 100%, 60%)',
+    background: colors.RED_50,
     borderLeft: colors.RED_50,
     borderRight: colors.RED_50,
     squareCorners: true,
@@ -221,7 +249,7 @@ const markerStyles: { +[styleName: string]: MarkerStyle } = {
   },
   MainThreadLongPaint: {
     ...defaultStyle,
-    background: 'hsl(347, 100%, 60%)',
+    background: colors.RED_50,
     borderLeft: colors.RED_50,
     borderRight: colors.RED_50,
     squareCorners: true,
