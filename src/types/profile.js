@@ -874,6 +874,15 @@ export type ProfileMeta = {|
   doesNotUseFrameImplementation?: boolean,
   // Hide the "Look up the function name on Searchfox" menu entry?
   sourceCodeIsNotOnSearchfox?: boolean,
+
+  // Palette specific fields
+  browser?: string,
+  cpu?: string,
+  memory?: string,
+  gpu?: string,
+  tags?: { [string]: string },
+  appVersion?: string,
+  appUrl?: string,
 |};
 
 /**
