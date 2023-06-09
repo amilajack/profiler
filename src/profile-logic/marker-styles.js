@@ -36,24 +36,22 @@ const ccStyle = {
   background: '#ffc600',
 };
 
-// Thresholds for Palette specific markers.
-const THRESHOLDS: { +[styleName: string]: [number, number] } = {
-  MainThreadLongTask: [100, 500],
-};
-
 /**
  * Get the marker style. Start off by looking at the marker name, then fallback to
  * the marker type.
  */
-export function getMarkerStyle(marker: Marker): MarkerStyle {
+export function getMarkerStyle(
+  marker: Marker,
+  thresholds?: [number, number]
+): MarkerStyle {
   const { data, name, start, end } = marker;
   const dur = end === null ? 0 : end - start;
   if (name in markerStyles) {
     return markerStyles[name];
   }
 
-  if (data && data.type in markerStyles && data.type in THRESHOLDS) {
-    const [, max] = THRESHOLDS[data.type];
+  if (data && data.type in markerStyles && thresholds) {
+    const [, max] = thresholds;
     if (dur >= max) {
       return {
         ...markerStyles[data.type],
