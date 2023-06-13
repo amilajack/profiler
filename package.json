@@ -200,5 +200,6 @@
       "post-rewrite": "node bin/post-rewrite.js",
       "pre-push": "yarn test-all"
     }
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }

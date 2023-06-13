@@ -909,11 +909,12 @@ export const getProfileUsesFrameImplementation: Selector<boolean> = (state) => {
 
 /** Should the "Look up the function name on Searchfox" menu entry be hidden? */
 export const getShouldDisplaySearchfox: Selector<boolean> = (state) => {
-  const { profile } = state.profileView;
-  if (!profile) {
-    return true;
-  }
-  return profile.meta.sourceCodeIsNotOnSearchfox !== true;
+  return false;
+  // const { profile } = state.profileView;
+  // if (!profile) {
+  //   return true;
+  // }
+  // return profile.meta.sourceCodeIsNotOnSearchfox !== true;
 };
 
 /* Hide the stack type of frames in context menus? */
