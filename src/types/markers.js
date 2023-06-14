@@ -112,6 +112,8 @@ export type MarkerSchema = {|
         value: string,
       |}
   >,
+
+  thresholds?: [number, number],
 |};
 
 export type MarkerSchemaByName = ObjectMap<MarkerSchema>;
