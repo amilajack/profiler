@@ -1,0 +1,32 @@
+.treeViewBody {
+  flex: 1;
+  will-change: scroll-position;
+  @apply relative z-0 overflow-auto bg-white outline-0;
+}
+
+.treeViewBodyInnerWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  min-width: 100%;
+  flex-flow: row nowrap;
+}
+
+.treeViewBodyInner0 {
+  @apply sticky left-0 z-20;
+}
+
+.treeViewBodyInner1 {
+  /* This allows the right column to expand more than its content, so that the
+  * background always extends to the right edge. */
+  flex-grow: 1;
+}
+
+.treeViewBodyInner {
+  @apply overflow-hidden bg-white;
+}
+
+.treeView.isResizingColumns {
+  cursor: col-resize;
+}
