@@ -356,7 +356,7 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
           {platformInformation ? (
             <div className="metaInfoRow">
               <span className="metaInfoLabel">OS</span>
-              <span className="metaInfoValue">{platformInformation}</span>
+              <span className="metaInfoValue">{meta.os}</span>
             </div>
           ) : null}
           {/* {meta.abi ? (
