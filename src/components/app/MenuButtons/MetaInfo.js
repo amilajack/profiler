@@ -269,6 +269,20 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
               <span className="metaInfoValue">{meta.appUrl}</span>
             </div>
           ) : null}
+          {meta.startTime ? (
+            <div className="metaInfoRow">
+              <span className="metaInfoLabel">Time</span>
+              <span className="metaInfoValue">
+                {new Date(meta.startTime).toLocaleDateString('en-US', {
+                  month: 'short',
+                  day: '2-digit',
+                  timeZoneName: 'short',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                })}
+              </span>
+            </div>
+          ) : null}
           {/* {meta.updateChannel ? (
             <div className="metaInfoRow">
               <span className="metaInfoLabel">
