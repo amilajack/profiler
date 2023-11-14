@@ -351,23 +351,19 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
           <Localized id="MenuButtons--metaInfo--platform">Platform</Localized>
         </h2>
         <div className="metaInfoSection">
-          {/* {meta.device ? (
+          {meta.device ? (
             <div className="metaInfoRow">
-              <span className="metaInfoLabel">
-                <Localized id="MenuButtons--metaInfo--device">
-                  Device:
-                </Localized>
-              </span>
-              {meta.device}
+              <span className="metaInfoLabel">Device</span>
+              <span className="metaInfoValue">{meta.device}</span>
             </div>
-          ) : null} */}
+          ) : null}
           {meta.browser ? (
             <div className="metaInfoRow">
               <span className="metaInfoLabel">Browser</span>
               <span className="metaInfoValue">{meta.browser}</span>
             </div>
           ) : null}
-          {platformInformation ? (
+          {meta.os ? (
             <div className="metaInfoRow">
               <span className="metaInfoLabel">OS</span>
               <span className="metaInfoValue">{meta.os}</span>
