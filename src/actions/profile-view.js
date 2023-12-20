@@ -56,6 +56,7 @@ import {
 import type {
   PreviewSelection,
   ImplementationFilter,
+  CategoriesFilter,
   CallTreeSummaryStrategy,
   TrackReference,
   TimelineType,
@@ -1754,6 +1755,17 @@ export function changeImplementationFilter(
       threadsKey,
       transformedThread,
       previousImplementation,
+    });
+  };
+}
+
+export function toggleCategoriesFilter(
+  categories: CategoriesFilter
+): ThunkAction<void> {
+  return (dispatch) => {
+    dispatch({
+      type: 'TOGGLE_CATEGORIES_FILTER',
+      categories,
     });
   };
 }

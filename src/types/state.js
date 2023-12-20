@@ -9,6 +9,7 @@ import type {
   DataSource,
   PreviewSelection,
   ImplementationFilter,
+  CategoriesFilter,
   CallTreeSummaryStrategy,
   RequestedLib,
   TrackReference,
@@ -301,6 +302,7 @@ export type ActiveTabSpecificProfileUrlState = {|
 export type ProfileSpecificUrlState = {|
   selectedThreads: Set<ThreadIndex> | null,
   implementation: ImplementationFilter,
+  categories: CategoriesFilter,
   lastSelectedCallTreeSummaryStrategy: CallTreeSummaryStrategy,
   invertCallstack: boolean,
   showUserTimings: boolean,

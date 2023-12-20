@@ -20,6 +20,7 @@ import type {
   TimelineType,
   DataSource,
   ImplementationFilter,
+  CategoriesFilter,
   CallTreeSummaryStrategy,
   UrlState,
   TimelineTrackOrganization,
@@ -68,6 +69,8 @@ export const getAllCommittedRanges: Selector<StartEndRange[]> = (state) =>
 export const getImplementationFilter: Selector<ImplementationFilter> = (
   state
 ) => getProfileSpecificState(state).implementation;
+export const getCategoriesFilter: Selector<CategoriesFilter> = (state) =>
+  getProfileSpecificState(state).categories;
 export const getLastSelectedCallTreeSummaryStrategy: Selector<
   CallTreeSummaryStrategy
 > = (state) =>

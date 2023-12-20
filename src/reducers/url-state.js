@@ -23,6 +23,7 @@ import type {
   TimelineTrackOrganization,
   SourceViewState,
   IsOpenPerPanelState,
+  CategoriesFilter,
 } from 'firefox-profiler/types';
 
 import type { TabSlug } from '../app-logic/tabs-handling';
@@ -260,6 +261,22 @@ const implementation: Reducer<ImplementationFilter> = (
       return action.implementationFilter || state;
     case 'CHANGE_IMPLEMENTATION_FILTER':
       return action.implementation;
+    default:
+      return state;
+  }
+};
+
+const categories: Reducer<CategoriesFilter> = (state = [], action) => {
+  switch (action.type) {
+    case 'PROFILE_LOADED':
+      return action.categoriesFilter || state;
+    case 'TOGGLE_CATEGORIES_FILTER':
+      return action.categories.reduce((state, category) => {
+        if (state.includes(category)) {
+          return state.filter((c) => c !== category);
+        }
+        return [...state, category];
+      }, state);
     default:
       return state;
   }
@@ -644,6 +661,7 @@ const activeTabProfileSpecific = combineReducers({
 const profileSpecific = combineReducers({
   selectedThreads,
   implementation,
+  categories,
   lastSelectedCallTreeSummaryStrategy,
   invertCallstack,
   showUserTimings,

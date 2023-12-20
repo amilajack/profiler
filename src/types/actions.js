@@ -140,6 +140,7 @@ export type RequestedLib = {|
   +breakpadId: string,
 |};
 export type ImplementationFilter = 'combined' | 'js' | 'cpp';
+export type CategoriesFilter = IndexIntoCategoryList[];
 // Change the strategy for computing the summarizing information for the call tree.
 export type CallTreeSummaryStrategy =
   | 'timing'
@@ -362,6 +363,7 @@ type ReceiveProfileAction =
       +profile: Profile,
       +pathInZipFile: ?string,
       +implementationFilter: ?ImplementationFilter,
+      +categoriesFilter: ?CategoriesFilter,
       +transformStacks: ?TransformStacksPerThread,
     |}
   | {|
@@ -457,6 +459,10 @@ type UrlStateAction =
       +transformedThread: Thread,
       +previousImplementation: ImplementationFilter,
       +implementation: ImplementationFilter,
+    |}
+  | {|
+      type: 'TOGGLE_CATEGORIES_FILTER',
+      categories: CategoriesFilter,
     |}
   | {|
       type: 'CHANGE_CALL_TREE_SUMMARY_STRATEGY',
