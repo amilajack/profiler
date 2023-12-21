@@ -26,6 +26,11 @@
   margin: 0 5px;
 }
 
+.stackSettingsListItem:not(:first-child) {
+  padding-left: 10px;
+  border-left: 1px solid var(--grey-20);
+}
+
 .stackSettingsLabel {
   height: 25px;
   padding: 0;
@@ -39,6 +44,37 @@
 .stackSettingsFilterLabel {
   align-items: center;
   padding: 0 5px 0 0;
+}
+
+.stackSettingsCategoryFilter {
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  font-size: 11px;
+  color: var(--grey-90);
+  border-radius: 2px;
+  padding: 0 4px;
+}
+
+.stackSettingsCategoryFilter > span {
+  display: inline-block;
+  box-sizing: border-box;
+  margin-right: 4px;
+  width: 9px;
+  height: 9px;
+  border-radius: 0px;
+  border-width: 0.5px;
+  border-style: solid;
+}
+
+.stackSettingsCategoryFilter > span[data-state="inactive"] {
+  background-color: var(--grey-90-a10);
+  border-color: var(--grey-90-a30);
+}
+.stackSettingsCategoryFilter > span:not(.category-color-transparent)[data-state="active"] {
+  border-color: rgb(0 0 0 / 0.1);
 }
 
 .stackSettingsSelect {

@@ -200,13 +200,19 @@ export function getThreadSelectorsPerThread(
     ProfileData.filterThreadByImplementation
   );
 
-  const _getImplementationAndSearchFilteredThread: Selector<Thread> =
+  const _getImplementationAndCategoriesFilteredThread: Selector<Thread> =
     createSelector(
       _getImplementationFilteredThread,
+      UrlState.getCategoriesFilter,
+      ProfileSelectors.getDefaultCategory,
+      ProfileData.filterThreadByCategories
+    );
+
+  const _getImplementationAndSearchFilteredThread: Selector<Thread> =
+    createSelector(
+      _getImplementationAndCategoriesFilteredThread,
       UrlState.getSearchStrings,
-      (thread, searchStrings) => {
-        return ProfileData.filterThreadToSearchStrings(thread, searchStrings);
-      }
+      ProfileData.filterThreadToSearchStrings
     );
 
   const getFilteredThread: Selector<Thread> = createSelector(

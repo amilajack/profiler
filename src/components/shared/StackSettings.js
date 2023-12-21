@@ -4,7 +4,7 @@
 
 // @flow
 
-import React, { PureComponent } from 'react';
+import React, { Fragment, PureComponent } from 'react';
 import { Localized } from '@fluent/react';
 
 import {
@@ -13,9 +13,11 @@ import {
   changeCallTreeSearchString,
   changeCallTreeSummaryStrategy,
   changeShowUserTimings,
+  toggleCategoriesFilter,
 } from 'firefox-profiler/actions/profile-view';
 import {
   getImplementationFilter,
+  getCategoriesFilter,
   getInvertCallstack,
   getSelectedTab,
   getShowUserTimings,
@@ -32,14 +34,40 @@ import explicitConnect, {
 } from 'firefox-profiler/utils/connect';
 import { selectedThreadSelectors } from 'firefox-profiler/selectors/per-thread';
 
-import { getProfileUsesMultipleStackTypes } from 'firefox-profiler/selectors/profile';
+import {
+  getProfileUsesMultipleStackTypes,
+  getCategories,
+} from 'firefox-profiler/selectors/profile';
 
 import './StackSettings.css';
 
 import type {
   ImplementationFilter,
   CallTreeSummaryStrategy,
+  CategoryList,
+  CategoriesFilter,
 } from 'firefox-profiler/types';
+
+type CategoryFilterItem = {|
+  name: string,
+  value: string[],
+  color: string,
+|};
+
+const CATEGORY_FILTERS: Array<CategoryFilterItem> = [
+  {
+    name: 'Source Code',
+    value: ['JavaScript'],
+    color: 'category-color-yellow',
+  },
+  { name: 'Dependency', value: ['Dependency'], color: 'category-color-brown' },
+  { name: 'React', value: ['React'], color: 'category-color-purple' },
+  {
+    name: 'Other',
+    value: ['Other', 'Idle'],
+    color: 'category-color-transparent',
+  },
+];
 
 type OwnProps = {|
   +hideInvertCallstack?: true,
@@ -47,6 +75,8 @@ type OwnProps = {|
 
 type StateProps = {|
   +implementationFilter: ImplementationFilter,
+  +categories: CategoryList,
+  +categoriesFilter: CategoriesFilter,
   +callTreeSummaryStrategy: CallTreeSummaryStrategy,
   +selectedTab: string,
   +invertCallstack: boolean,
@@ -64,6 +94,7 @@ type DispatchProps = {|
   +changeShowUserTimings: typeof changeShowUserTimings,
   +changeCallTreeSearchString: typeof changeCallTreeSearchString,
   +changeCallTreeSummaryStrategy: typeof changeCallTreeSummaryStrategy,
+  +toggleCategoriesFilter: typeof toggleCategoriesFilter,
 |};
 
 type Props = ConnectedProps<OwnProps, StateProps, DispatchProps>;
@@ -117,6 +148,32 @@ class StackSettingsImpl extends PureComponent<Props> {
     );
   }
 
+  _renderCategoryFilterButton({ name, value, color }: CategoryFilterItem) {
+    const categoryIndices = value.map((v) =>
+      this.props.categories.findIndex((c) => c.name === v)
+    );
+    const isCategoryActive = !categoryIndices.every((categoryIndex) =>
+      this.props.categoriesFilter.some(
+        (categoryFilterIndex) => categoryFilterIndex === categoryIndex
+      )
+    );
+
+    return (
+      <button
+        className="stackSettingsCategoryFilter"
+        type="button"
+        // eslint-disable-next-line react/jsx-no-bind
+        onClick={() => this.props.toggleCategoriesFilter(categoryIndices)}
+      >
+        <span
+          className={isCategoryActive ? color : undefined}
+          data-state={isCategoryActive ? 'active' : 'inactive'}
+        />
+        {name}
+      </button>
+    );
+  }
+
   _renderCallTreeStrategyOption(
     labelL10nId: string,
     strategy: CallTreeSummaryStrategy
@@ -146,6 +203,13 @@ class StackSettingsImpl extends PureComponent<Props> {
     return (
       <div className="stackSettings">
         <ul className="stackSettingsList">
+          <li className="stackSettingsListItem">
+            {CATEGORY_FILTERS.map((categoryFilter) => (
+              <Fragment key={categoryFilter.name}>
+                {this._renderCategoryFilterButton(categoryFilter)}
+              </Fragment>
+            ))}
+          </li>
           {/* <li className="stackSettingsListItem stackSettingsFilter">
             {this._renderImplementationRadioButton(
               'StackSettings--implementation-all-stacks',
@@ -268,6 +332,8 @@ export const StackSettings = explicitConnect<
     selectedTab: getSelectedTab(state),
     showUserTimings: getShowUserTimings(state),
     implementationFilter: getImplementationFilter(state),
+    categories: getCategories(state),
+    categoriesFilter: getCategoriesFilter(state),
     currentSearchString: getCurrentSearchString(state),
     hasJsAllocations: selectedThreadSelectors.getHasJsAllocations(state),
     hasNativeAllocations:
@@ -284,6 +350,7 @@ export const StackSettings = explicitConnect<
     changeCallTreeSearchString,
     changeCallTreeSummaryStrategy,
     changeShowUserTimings,
+    toggleCategoriesFilter,
   },
   component: StackSettingsImpl,
 });
