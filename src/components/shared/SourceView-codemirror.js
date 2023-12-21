@@ -60,15 +60,17 @@ function _languageExtForPath(
   if (path.endsWith('.rs')) {
     return rust();
   }
-  if (
-    path.endsWith('.mjs') ||
-    path.endsWith('.js') ||
-    path.endsWith('.jsm') ||
-    path.endsWith('.jsx') ||
-    path.endsWith('.ts') ||
-    path.endsWith('.tsx')
-  ) {
-    return javascript();
+  if (path.endsWith('.mjs') || path.endsWith('.js') || path.endsWith('.jsm')) {
+    return javascript({ jsx: false, typescript: false });
+  }
+  if (path.endsWith('.ts')) {
+    return javascript({ jsx: false, typescript: true });
+  }
+  if (path.endsWith('.jsx')) {
+    return javascript({ jsx: true, typescript: false });
+  }
+  if (path.endsWith('.tsx')) {
+    return javascript({ jsx: true, typescript: true });
   }
   if (path.endsWith('.vue')) {
     return html();
