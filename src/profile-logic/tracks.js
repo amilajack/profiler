@@ -862,28 +862,31 @@ export function computeDefaultVisibleThreads(
     return b.boostedSampleScore - a.boostedSampleScore;
   });
 
-  // Take the top 15 threads and cull everything else.
-  const top15 = scores.slice(0, 15);
+  // always show all the given threads
+  return new Set(scores.map(({ threadIndex }) => threadIndex));
 
-  // As a last pass, cull very-idle threads, by comparing their activity
-  // to the thread with the most "sampleScore" activity.
-  // We keep all threads whose sampleScore is at least 5% of the highest
-  // sampleScore, and also any threads which are otherwise essential.
-  const highestSampleScore = Math.max(
-    ...scores.map(({ score }) => score.sampleScore)
-  );
-  const thresholdSampleScore = highestSampleScore * IDLE_THRESHOLD_FRACTION;
-  const finalList = top15.filter(({ score }) => {
-    if (score.isEssentialFirefoxThread) {
-      return true; // keep.
-    }
-    if (score.isInterestingEvenWithMinimalActivity && score.sampleScore > 0) {
-      return true; // keep.
-    }
-    return score.sampleScore >= thresholdSampleScore;
-  });
+  // // Take the top 15 threads and cull everything else.
+  // const top15 = scores.slice(0, 15);
 
-  return new Set(finalList.map(({ threadIndex }) => threadIndex));
+  // // As a last pass, cull very-idle threads, by comparing their activity
+  // // to the thread with the most "sampleScore" activity.
+  // // We keep all threads whose sampleScore is at least 5% of the highest
+  // // sampleScore, and also any threads which are otherwise essential.
+  // const highestSampleScore = Math.max(
+  //   ...scores.map(({ score }) => score.sampleScore)
+  // );
+  // const thresholdSampleScore = highestSampleScore * IDLE_THRESHOLD_FRACTION;
+  // const finalList = top15.filter(({ score }) => {
+  //   if (score.isEssentialFirefoxThread) {
+  //     return true; // keep.
+  //   }
+  //   if (score.isInterestingEvenWithMinimalActivity && score.sampleScore > 0) {
+  //     return true; // keep.
+  //   }
+  //   return score.sampleScore >= thresholdSampleScore;
+  // });
+
+  // return new Set(finalList.map(({ threadIndex }) => threadIndex));
 }
 
 type DefaultVisibilityScore = {|
