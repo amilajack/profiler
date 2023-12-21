@@ -179,6 +179,7 @@ type BaseQuery = {|
   symbolServer: string,
   view: string,
   implementation: string,
+  categories: string,
   timelineType: string,
   sourceView: string,
   ...FullProfileSpecificBaseQuery,
@@ -365,6 +366,7 @@ export function getQueryStringFromUrlState(urlState: UrlState): string {
       urlState.profileSpecific.implementation === 'combined'
         ? undefined
         : urlState.profileSpecific.implementation,
+    categories: urlState.profileSpecific.categories.join(',') || undefined,
     timelineType:
       // The default is the cpu-category view, so only add it to the URL if it's
       // the stack or category view.
@@ -605,6 +607,9 @@ export function stateFromLocation(
     ),
     profileSpecific: {
       implementation,
+      categories: query.categories
+        ? query.categories.split(',').map(Number)
+        : [],
       lastSelectedCallTreeSummaryStrategy: toValidCallTreeSummaryStrategy(
         query.ctSummary || undefined
       ),
