@@ -395,6 +395,12 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
               <span className="metaInfoValue">{meta.gpu}</span>
             </div>
           ) : null}
+          {meta.connection ? (
+            <div className="metaInfoRow">
+              <span className="metaInfoLabel">Connection</span>
+              <span className="metaInfoValue">{meta.connection}</span>
+            </div>
+          ) : null}
           {/* {meta.mainMemory ? (
             <div className="metaInfoRow">
               <span className="metaInfoLabel">

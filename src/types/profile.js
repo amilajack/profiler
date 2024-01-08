@@ -883,6 +883,7 @@ export type ProfileMeta = {|
   tags?: { [string]: string },
   appVersion?: string,
   appUrl?: string,
+  connection?: string,
 |};
 
 /**
