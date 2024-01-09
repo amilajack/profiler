@@ -348,7 +348,8 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
           ) : null} */}
         </div>
         <h2 className="metaInfoSubTitle">
-          <Localized id="MenuButtons--metaInfo--platform">Platform</Localized>
+          {/* <Localized id="MenuButtons--metaInfo--platform">Platform</Localized> */}
+          Info
         </h2>
         <div className="metaInfoSection">
           {meta.device ? (
@@ -359,7 +360,7 @@ class MetaInfoPanelImpl extends React.PureComponent<Props> {
           ) : null}
           {meta.browser ? (
             <div className="metaInfoRow">
-              <span className="metaInfoLabel">Browser</span>
+              <span className="metaInfoLabel">Platform</span>
               <span className="metaInfoValue">{meta.browser}</span>
             </div>
           ) : null}
